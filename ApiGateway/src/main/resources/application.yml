@@ -1,0 +1,32 @@
+server:
+  port: 8080
+  
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    
+spring:
+  cloud:
+    gateway:
+      mvc:
+        routes:
+        - id: USERSERVICE
+          uri:
+            lb://USERSERVICE
+          predicates:
+           - Path=/v1/users/**         
+        - id: HOTELSERVICE
+          uri:
+            lb://HOTELSERVICE
+          predicates:
+           - Path=/v1/hotel/**         
+        - id: RATINGSERVICE
+          uri:
+            lb://RATINGSERVICE
+          predicates:
+           - Path=/v1/rating/**         
+        
+           
